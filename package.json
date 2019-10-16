@@ -1,7 +1,7 @@
 {
   "name": "presupuestos",
   "version": "1.0.0",
-  "description": "App para calcular el presupuesto de los clientes",
+  "description": "App para calcular el presupuesto de los usuarios",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index",

@@ -1,4 +1,15 @@
 <main class="lista-vacantes">
+        <header class="site-header contenedor separador">
+        <h2>{{nombrePagina}}</h2>
+
+        {{#if tagline}}
+        <p class="tagline">{{tagline}}</p>
+        {{/if}}
+
+        {{#if boton}}
+        <a href="/vacante/nueva" class="btn btn-azul">Publicar nueva vacante</a>
+        {{/if}}
+    
     <h2>Lista de vacantes</h2>
 
     {{#each vacantes}}
@@ -18,4 +29,5 @@
         </div>
     </div>
     {{/each}}
+    </header>
 </main>
