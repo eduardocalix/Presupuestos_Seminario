@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const presupuestoController = require("../Controllers/presupuestoController");
-//const vacanteController = require("../controllers/vacanteController");
+const usuarioController = require("../controllers/usuarioController");
 
 module.exports = () => {
   router.get("/", presupuestoController.homePresupuesto);
- 
+  router.get("/iniciarSesion", usuarioController.formularioInicioSesion);
+  router.get("/crearUsuario", usuarioController.formularioCrearUsuario);
+
+
+ // router.post("/iniciarSesion", authController.autenticarUsuario);
 
   return router;
 };
