@@ -1,59 +1,53 @@
-<div class="header">
-        <img src="img/2.jpg" alt="Logotipo del Laudato Si'">
-    </div>
-<nav class="navbar navbar-expand-lg navbar-blue bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <i class="fas fa-link"></i> Articulos Laudato Si
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Master Presupuesto</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto my-2 my-lg-0">
         {{#if user}}
          <li class="navbar-brand">
-          <a class="nav-link" href="/Profile">{{user.nombreCompleto}}</a>
+          <a class="nav-link js-scroll-trigger" href="/Profile">{{user.nombreCompleto}}</a>
 
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-          Articulos
+          presupuestos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/articles">Todos mis articulos</a>
+            <a class="dropdown-item" href="/articles">Todos mis presupuestos</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/articles/listAll">Todos los articulos</a>
+            <a class="dropdown-item" href="/articles/listAll">Todos los presupuestos</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/articles/add">Agregar un Articulo</a>
+            <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/profile">Perfil</a>
+          <a class="nav-link js-scroll-trigger" href="/profile">Perfil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Cerrar Sesión</a>
+          <a class="nav-link js-scroll-trigger" href="/logout">Cerrar Sesión</a>
         </li>
         
         {{else}}
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-          Articulos
+          Presupuestos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/articles/listAll">Todos los articulos</a>
+            <a class="dropdown-item" href="/articles/listAll">Todos los presupuestos</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/articles/add">Agregar un Articulo</a>
+            <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signin">Iniciar Sesión</a>
+          <a class="nav-link js-scroll-trigger" href="/iniciarSesion">Iniciar Sesión</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Crear Cuenta</a>
+          <a class="nav-link js-scroll-trigger" href="/crearCuenta">Crear Cuenta</a>
         </li>
        
         {{/if}}
@@ -61,3 +55,20 @@
     </div>
   </div>
 </nav>
+
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-uppercase text-white font-weight-bold">Your Favorite Source of Free Bootstrap Themes</h1>
+          <hr class="divider my-4">
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5">Start Bootstrap can help you build better websites using the Bootstrap framework! Just download a theme and start customizing, no strings attached!</p>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+        </div>
+      </div>
+    </div>
+  </header>

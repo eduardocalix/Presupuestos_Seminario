@@ -5,14 +5,14 @@ const mongoose = require("mongoose");
 // Mostrar el formulario de inicio de sesión
 
 exports.formularioInicioSesion = (req, res) => {
-    res.render("user/signin", {
+    res.render("user/iniciarSesion", {
       nombrePagina: "Iniciar sesión en Master Presupuesto"
     });
   };
 
   
 exports.formularioCrearUsuario = (req, res) => {
-    res.render("user/signup", {
-      nombrePagina: "Iniciar sesión en Master Presupuesto"
+    res.render("user/crearCuenta", {
+      nombrePagina: "Crear cuenta en Master Presupuesto"
     });
   };

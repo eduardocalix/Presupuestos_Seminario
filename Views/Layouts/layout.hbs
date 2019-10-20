@@ -7,33 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
    {{!--NORMALIZE--}}
   <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-  {{!-- GOOGLE FONTS --}}
-  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Merriweather|Sniglet" rel="stylesheet">
-
+   <!-- Font Awesome Icons -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> 
   {{!-- BOOTSTRAP 4 --}}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   {{!-- FONT AWESOME 5 --}}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
     crossorigin="anonymous">
- 
+  {{!-- GOOGLE FONTS --}}
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Sniglet" rel="stylesheet">
   {{!-- ESTILOS--}}
-  <link rel="stylesheet" type="text/css" href="css/styles.css">
-  <link rel="stylesheet" type="text/css" href="css/estilos.css">
+  {{!-- <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/estilos.css">  --}}
+    <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+  <!-- Theme CSS - Includes Bootstrap -->
+  <link href="css/creative.min.css" rel="stylesheet">
+
+
+ 
+
+  
     <title>{{nombrePagina}}</title>
 </head>
 
 <body>
-
-    <div class="contenido-principal contenedor">
-           {{!Funciones que se llaman con handlebars}}
- 
+  <div class="container">
         {{>navigation}}  
         {{>message}}
         {{{body}}}
         {{>footer}}
-    </div>
-
+  </div>
     {{!-- Script para trix (WYSIWGY) --}}
     <script src="/js/trix.js"></script>
     {{!-- Webpack bundle --}}
@@ -43,6 +50,16 @@
 	<script src="js/bienvenido.js"></script>
 	<script src="js/hora.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/creative.min.js"></script>
 
 	<!--Cuando no ha cargado la página.-->
 	<script>

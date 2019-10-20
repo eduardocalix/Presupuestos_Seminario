@@ -140,8 +140,9 @@ body {
     background-color: #111;
       color: #282c2d;
       font-size: 20px;
-    text-align: center;
-    height: 100px;
+      text-align: center;
+      height: 100px;
+      width:100%;
       padding-top: 1px;
   }
   

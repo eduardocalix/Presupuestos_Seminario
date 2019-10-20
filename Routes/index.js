@@ -6,7 +6,7 @@ const usuarioController = require("../controllers/usuarioController");
 module.exports = () => {
   router.get("/", presupuestoController.homePresupuesto);
   router.get("/iniciarSesion", usuarioController.formularioInicioSesion);
-  router.get("/crearUsuario", usuarioController.formularioCrearUsuario);
+  router.get("/crearCuenta", usuarioController.formularioCrearUsuario);
 
 
  // router.post("/iniciarSesion", authController.autenticarUsuario);
