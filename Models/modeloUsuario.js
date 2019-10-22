@@ -1,25 +1,25 @@
-const mongoose = require("mongoose");
-mongoose.Promise = global.Promise;
-const slug = require("slug");
-const shortid = require("shortid");
-
 // Definición del schema
 // https://mongoosejs.com/docs/guide.html#models
 // Tipos de schemas en Mongoose
 // https://mongoosejs.com/docs/schematypes.html
+
+
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const bcrypt = require("bcrypt");
+
+// Definición del schema
 const usuarioSchema = new mongoose.Schema({
-  nombreCompleto: {
+  nombre: {
     type: String,
-    required: "El ingreso mensual es requerido",
-    trim: true
-  },
-  nombreUsuario: {
-    type: String,
+    required: true,
     trim: true
   },
   correo: {
     type: String,
+    unique:true,
     required: " El mes es requerido",
+    lowercase:true,
     trim: true
   },
   telefono: {
@@ -27,22 +27,74 @@ const usuarioSchema = new mongoose.Schema({
     default: 0,
     trim: true
   },
+ 
   contrasena: {
     type: String,
+    required: true,
     trim: true
   },
-  url: {
-    type: String,
-    lowercase: true
+  token: String,
+  expira: Date
+});
+// Hooks (método) para hash + salt contrasena
+usuarioSchema.pre("save", function(next) {
+  const user = this;
+
+  // Si el contrasena ya fué modificado (ya hasheado)
+  if (!user.isModified("contrasena")) {
+    return next();
+  }
+
+  // Generar el salt y si no hay error, hashear el contrasena
+  // Se almacena tanto el hash+salt para evitar ataques
+  // de rainbow table.
+  bcrypt.genSalt(10, (err, salt) => {
+    // Si hay un error no continuar
+    if (err) return next(err);
+
+    // Si se produjo el salt, realizar el hash
+    bcrypt.hash(user.contrasena, salt, (err, hash) => {
+      if (err) return next(err);
+
+      user.contrasena = hash;
+      next();
+    });
+  });
+});
+
+// Hooks para poder pasar los errores de MongoBD hacia express validator
+usuarioSchema.post("save", function(error, doc, next) {
+  // Verificar que es un error de MongoDB
+  if (error.name === "MongoError" && error.code === 11000) {
+    next(
+      "Ya existe un usuario con la dirección de correo electrónico ingresada"
+    );
+  } else {
+    next(error);
   }
 });
-// Hooks para generar la URL (en Mongoose se conoce como middleware)
-usuarioSchema.pre("save", function(next) {
-  // Crear la URL
-  const url = slug(this.titulo);
-  this.url = `${url}-${shortid.generate()}`;
 
-  next();
-});
+// Realizar un método que automáticamente verifique el contrasena ingresado
+// contra el almacenado (hash + salt)
+usuarioSchema.methods.compararcontrasena = function(candidatePassword) {
+  return bcrypt.compareSync(candidatePassword, this.contrasena);
+};
+usuarioSchema.methods.comparecontrasena = function(candidatePassword) {
+  const user = this;
 
-module.exports = mongoose.model("usuario", usuarioSchema);
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(candidatePassword, user.contrasena, (err, isMatch) => {
+      if (err) {
+        return reject(err);
+      }
+
+      if (!isMatch) {
+        return reject(false);
+      }
+
+      resolve(true);
+    });
+  }).catch();
+};
+
+module.exports = mongoose.model("modeloUsuario", usuarioSchema);

@@ -1,4 +1,4 @@
-/* const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 require("dotenv").config({ path: "variables.env" });
 
 // Configuracioón de Mongoose
@@ -9,7 +9,7 @@ require("dotenv").config({ path: "variables.env" });
 
 mongoose.connection.on("error", error => {
   console.log(error);
-}); */
+});
 
 // Importando los modelos
 //require("../models/Vacante");
