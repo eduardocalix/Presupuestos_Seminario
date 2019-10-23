@@ -18,3 +18,10 @@ exports.homePresupuesto = async (req, res, next) => {
     //vacantes
   });
 };
+
+exports.formularioPresupuesto = async (req, res, next) => {
+  res.render("presupuesto/nuevoPresupuesto", {
+    nombrePagina: "Nuevo Presupuesto",
+    tagline: "Realiza tu presupuesto en nuetra App"
+  });
+};

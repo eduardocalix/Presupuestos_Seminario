@@ -22,15 +22,7 @@ const presupuestoSchema = new mongoose.Schema({
     required: " El mes es requerido",
     trim: true
   },
-  salario: {
-    type: String,
-    default: 0,
-    trim: true
-  },
-  contrato: {
-    type: String,
-    trim: true
-  },
+  
   descripcion: {
     type: String,
     trim: true
@@ -40,13 +32,18 @@ const presupuestoSchema = new mongoose.Schema({
     lowercase: true
   },
   skills: [String],
-  candidatos: [
+  gastos: [
     {
-      nombre: String,
-      email: String,
-      hojaVida: String
+      tipo: String,
+      gastoEsperado: Number,
+      gasoReal: Number,
+      diferencia: Number
     }
-  ]
+  ],
+  totalPresupuesto: {
+    type: Number,
+    trim: true
+  }
 });
 // Hooks para generar la URL (en Mongoose se conoce como middleware)
 presupuestoSchema.pre("save", function(next) {

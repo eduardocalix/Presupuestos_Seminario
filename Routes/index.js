@@ -44,6 +44,8 @@ module.exports = () => {
  // router.post("/iniciarSesion", authController.autenticarUsuario);
  // Cerrar sesión
  router.get("/cerrarSesion", authController.cerrarSesion);
- 
+ //Presupuestos
+ router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
+ //router.post("/nuevoPresupuesto", presupuestoController.autenticarUsuario);
   return router;
 };
