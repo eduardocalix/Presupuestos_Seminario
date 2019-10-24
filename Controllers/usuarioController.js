@@ -24,7 +24,7 @@ exports.agregarUsuario = async (req, res, next) => {
     errores.array().map(error => erroresArray.push(error.msg));
 
     // Enviar los errores de regreso al usuario
-    req.flash("error", erroresArray);
+    req.flash('errors', [erroresArray]);
 
     res.render("user/crearCuenta", {
       nombrePagina: "Crear cuenta en Master Presupuesto",
@@ -40,6 +40,10 @@ exports.agregarUsuario = async (req, res, next) => {
   // tratar de almacenar el usuario
   try {
     await usuario.save();
+    console.log(usuario);
+
+    req.flash("success", ['El usuario registrado exitosamente']);
+
   } catch (error) {
     // Ingresar el error al arreglo de errores
     erroresArray.push(error);

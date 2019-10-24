@@ -3,6 +3,7 @@ const router = express.Router();
 const { check } = require("express-validator");
 
 const presupuestoController = require("../Controllers/presupuestoController");
+
 const usuarioController = require("../controllers/usuarioController");
 const authController = require("../controllers/authController");
 
@@ -25,9 +26,9 @@ module.exports = () => {
       check("correo", "El correo electrónico es requerido.")
         .not()
         .isEmpty(),
-      check("correo", "El correo electrónico no es vålido.")
-        .isEmail()
-        .normalizeEmail(),
+      check("telefono", "El telefono no es vålido.")
+        .not()
+        .isEmpty(),
       check("contrasena", "La contraseña es requerida.")
         .not()
         .isEmpty(),
@@ -41,11 +42,11 @@ module.exports = () => {
     ],
     usuarioController.agregarUsuario
   );
- // router.post("/iniciarSesion", authController.autenticarUsuario);
+ router.post("/iniciarSesion", authController.autenticarUsuario);
  // Cerrar sesión
  router.get("/cerrarSesion", authController.cerrarSesion);
  //Presupuestos
- router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
- //router.post("/nuevoPresupuesto", presupuestoController.autenticarUsuario);
+  router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
+ router.post("/nuevoPresupuesto", presupuestoController.crearPresupuesto);
   return router;
 };
