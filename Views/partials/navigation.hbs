@@ -8,20 +8,30 @@
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
         {{#if user}}
          <li class="navbar-brand">
-          <a class="nav-link js-scroll-trigger" href="/Profile">{{user.nombreCompleto}}</a>
-
+          <a class="nav-link js-scroll-trigger" href="/Profile">{{user.nombre}}</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-          presupuestos
+          Presupuestos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/articles">Todos mis presupuestos</a>
+            <a class="dropdown-item" href="/mostrarPresupuesto">Todos mis presupuestos</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/articles/listAll">Todos los presupuestos</a>
+            <a class="dropdown-item" href="/nuevoPresupuesto">Agregar un presupuesto</a>
+            {{!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a> --}}
+          </div>
+        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+          Gastos
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/mostrarGasto">Todos mis gastos</a>           
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a>
+            <a class="dropdown-item" href="/nuevoGasto">Agregar un gasto</a>
           </div>
         </li>
         <li class="nav-item">

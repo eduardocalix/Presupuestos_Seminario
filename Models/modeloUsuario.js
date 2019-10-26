@@ -97,4 +97,4 @@ usuarioSchema.methods.comparecontrasena = function(candidatePassword) {
   }).catch();
 };
 
-module.exports = mongoose.model("modeloUsuario", usuarioSchema);
+module.exports = mongoose.model("Usuario", usuarioSchema);

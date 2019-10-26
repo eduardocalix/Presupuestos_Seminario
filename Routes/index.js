@@ -46,7 +46,7 @@ module.exports = () => {
  // Cerrar sesión
  router.get("/cerrarSesion", authController.cerrarSesion);
  //Presupuestos
-  router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
- router.post("/nuevoPresupuesto", presupuestoController.crearPresupuesto);
+  //router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
+ //router.post("/nuevoPresupuesto", presupuestoController.crearPresupuesto);
   return router;
 };
