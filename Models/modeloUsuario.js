@@ -34,7 +34,7 @@ const usuarioSchema = new mongoose.Schema({
   /* imagen: {
     type: String,
     trim: true,
-    default: "defecto.jpg"
+    default: "img.jpg"
   }, */
 
   contrasena: {
@@ -87,10 +87,10 @@ usuarioSchema.post("save", function(error, doc, next) {
 
 // Realizar un método que automáticamente verifique el contrasena ingresado
 // contra el almacenado (hash + salt)
-usuarioSchema.methods.compararcontrasena = function(candidatePassword) {
+usuarioSchema.methods.compararContrasena = function(candidatePassword) {
   return bcrypt.compareSync(candidatePassword, this.contrasena);
 };
-usuarioSchema.methods.comparecontrasena = function(candidatePassword) {
+usuarioSchema.methods.compareContrasena = function(candidatePassword) {
   const user = this;
 
   return new Promise((resolve, reject) => {

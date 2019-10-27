@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 //const Gasto = mongoose.model("gasto");
-mongoose.connect('mongodb://localhost/news');
 
 //const Presupuesto = mongoose.model("presupuesto");
 const Presupuesto = require('../Models/modeloPresupuesto');
+const Usuario = require('../Models/modeloUsuario');
 
 const Gasto = require("../Models/modeloGastos");
 
 exports.formularioNuevaGasto = (req, res) => {
-    res.render("presupuesto/nuevoGasto:url", {
+  
+
+    res.render("presupuesto/nuevoGasto", {
       nombrePagina: "Nuevo gasto",
       tagline: "Llena el formulario y publica un nueva gasto"
+
     });
   };
   // Opciones de querys Mongoose para CRUDS
@@ -30,7 +33,7 @@ exports.formularioNuevaGasto = (req, res) => {
     const nuevoGasto = await gasto.save();
   
     // Redireccionar
-    res.redirect(`presupuesto/nuevoGasto/${presupuesto.url}`);
+    res.redirect("/nuevoGasto",req.params.url );
   };
   
   // Mostrar una gasto

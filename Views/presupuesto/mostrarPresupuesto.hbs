@@ -1,10 +1,19 @@
+<div class="container">
+  <br><br><br><br><br>
+
 <div class="row">
   {{#each presupuestos}}
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="card">
       <div class="card-body">
+      
         <h4 class="card-title d-flex justify-content-between align-items-center">
-          {{ mes }} <br>{{ingresoMensual}}<a href="/editarPresupuesto/{{_id}}"><i class="fas fa-edit"></i></a>
+          Usuario: {{user.nombre}}
+        </h4>
+        
+
+        <h4 class="card-title d-flex justify-content-between align-items-center">
+          El mes: {{ mes }} <br>Ingreso mensual{{ingresoMensual}}<a href="/editarPresupuesto/{{url}}"><i class="fas fa-edit"></i></a>
         </h4>
         <p>{{ descripcion }}</p>
         <!-- Parte de eliminar -->
@@ -15,6 +24,7 @@
       </div>
     </div>
   </div>
+
   {{else}}
   <div class="card mx-auto">
     <div class="card-body">
@@ -24,4 +34,5 @@
     </div>
   </div>
   {{/each}}
+</div>
 </div>

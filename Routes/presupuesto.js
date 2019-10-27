@@ -56,19 +56,17 @@ router.get("/mostrarGasto/", gastoController.mostrarGastos);
 
 // Editar una gasto
 router.get(
-  "/gasto/editar/:url",
+  "/gasto/editarGasto/:url",
   authController.verificarUsuario,
   gastoController.formularioEditarGasto
 );
 router.post(
-  "/gasto/editar/:url",
+  "/gasto/editarGasto/:url",
   authController.verificarUsuario,
   gastoController.editarGasto
 );
 
 // Eliminar una gasto
 router.delete("/gasto/eliminar/:id", gastoController.eliminarGasto);
-
-
   return router;
 };

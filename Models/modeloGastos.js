@@ -47,7 +47,7 @@ const gastoSchema = new mongoose.Schema({
 // Hooks para generar la URL (en Mongoose se conoce como middleware)
 gastoSchema.pre("save", function(next) {
   // Crear la URL
-  const url = slug(this.titulo);
+  const url = slug(this.nombre);
   this.url = `${url}-${shortid.generate()}`;
 
   next();

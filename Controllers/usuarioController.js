@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/news');
 //const Usuario = mongoose.model("usuario");
 const { validationResult } = require("express-validator");
 const Usuario = require('../Models/modeloUsuario');

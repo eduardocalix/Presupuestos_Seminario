@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 //const Vacante = mongoose.model("Vacante");
 
 exports.autenticarUsuario = passport.authenticate("local", {
-  successRedirect: "presupuesto/nuevoPresupuesto",
-  failureRedirect: "user/iniciarSesion",
+  successRedirect: "/nuevoPresupuesto",
+  failureRedirect: "/iniciarSesion",
   failureFlash: true,
   badRequestMessage: ["Debes ingresar ambos campos"]
 });
@@ -29,5 +29,5 @@ exports.verificarUsuario = (req, res, next) => {
   }
 
   // Si no se autenticó, redirecccionarlo al inicio de sesión
-  res.redirect("/iniciarSesion");
+  res.redirect("user/iniciarSesion");
 };

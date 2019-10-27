@@ -17,16 +17,19 @@ passport.use(
 
       //   Si el usuario no existe
       if (!usuario) {
+      console.log("datos no encontrado correo");
         return done(null, false, {
           message: ["El correo electrónico no es válido"]
         });
       }
 
       // El usuario existe, verificar si la contraseña es correcta
-      const verificarPassword = usuario.compararcontrasena(contrasena);
+      const verificarPassword = usuario.compararContrasena(contrasena);
 
       //   Si el password es incorrecto
       if (!verificarPassword) {
+      console.log("datos no encontrado");
+
         return done(null, false, {
           message: ["La contraseña ingresada es incorrecta"]
         });

@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/news');
 //const Presupuesto = mongoose.model("presupuesto");
 const Presupuesto = require('../Models/modeloPresupuesto');
 //const Vacante = mongoose.model("Vacante");
 const { isAuthenticated } = require('../helpers/auth');
+const Usuario = require('../Models/modeloUsuario');
 
 exports.homePresupuesto = async (req, res, next) => {
   res.render("inicio", {
@@ -26,7 +26,7 @@ exports.formularioPresupuesto =  async (req, res, next) => {
   // Agregar una nueva presupuesto a la base de datos
   exports.agregarPresupuesto = async (req, res) => {
     const usuarioO = req.user;
-    console.log("estos son los datos qwue tra el presupuesto");
+    console.log("estos son los datos que trae el presupuesto");
     console.log(req.body);
   
     const presupuesto = new Presupuesto(req.body);
@@ -38,22 +38,23 @@ exports.formularioPresupuesto =  async (req, res, next) => {
     const nuevoPresupuesto = await presupuesto.save();
   
     // Redireccionar
-   res.redirect(`presupuesto/nuevoGasto/${nuevoPresupuesto.url}`);
+   res.redirect("/nuevoGasto",nuevoPresupuesto);
   };
   
   // Mostrar una presupuesto
   exports.mostrarPresupuesto = async (req, res, next) => {
     
     const usuarioO = req.user;
-    const presupuesto = await Presupuesto.find({ usuario: usuarioO._id });
-  
+    const presupuestos = await Presupuesto.find({ usuario: usuarioO._id });
+    const usuario = await Usuario.findOne({ _id: usuarioO._id });    
     // Si no hay resultados
-    if (!presupuesto) return next();
+    if (!presupuestos) return next();
+    console.log(usuario);
   
-    res.render("presupuesto", {
-      nombrePagina: presupuesto.titulo,
-      barra: true,
-      presupuesto
+    res.render("presupuesto/mostrarPresupuesto", {
+      nombrePagina: "Presupuestos",
+      presupuestos,
+      usuario
     });
   };
   
@@ -66,20 +67,10 @@ exports.formularioPresupuesto =  async (req, res, next) => {
   
     // Si no existe la presupuesto
     if (!presupuesto) return next();
-        const lasCategorias = await Categoria.find({
-        registradoPor: elUsuario._id,
-        estado: 1
-      });
-  
-    // Si no existen categorias
-    if (!lasCategorias) return next();
-
-    res.render("editarPresupuesto", {
+     
+    res.render("presupuesto/editarPresupuesto", {
       nombrePagina: 'Editar presupuesto',
-      presupuesto,
-      //cerrarSesion: true,
-      usuarioO,
-      nombre: req.user.nombre
+      presupuesto
     });
   };
   
@@ -100,7 +91,7 @@ exports.formularioPresupuesto =  async (req, res, next) => {
       }
     );
   
-    res.redirect('/presupuesto/mostrarPresupuesto');
+    res.redirect('/mostrarPresupuesto');
   };
   
   // Eliminar una presupuesto

@@ -53,7 +53,7 @@ const presupuestoSchema = new mongoose.Schema({
 // Hooks para generar la URL (en Mongoose se conoce como middleware)
 presupuestoSchema.pre("save", function(next) {
   // Crear la URL
-  const url = slug(this.titulo);
+  const url = slug(this.ingresoMensual);
   this.url = `${url}-${shortid.generate()}`;
 
   next();
