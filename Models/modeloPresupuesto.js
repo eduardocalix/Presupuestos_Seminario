@@ -27,11 +27,15 @@ const presupuestoSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  usuario: {
+    type: String,
+    trim: true
+  },
   url: {
     type: String,
     lowercase: true
   },
-  skills: [String],
+  /* skills: [String],
   gastos: [
     {
       tipo: String,
@@ -39,10 +43,11 @@ const presupuestoSchema = new mongoose.Schema({
       gasoReal: Number,
       diferencia: Number
     }
-  ],
+  ], */
   totalPresupuesto: {
     type: Number,
-    trim: true
+    trim: true,
+    default:0
   }
 });
 // Hooks para generar la URL (en Mongoose se conoce como middleware)

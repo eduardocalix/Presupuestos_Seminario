@@ -1,32 +1,36 @@
 const mongoose = require("mongoose");
 //const Gasto = mongoose.model("gasto");
+mongoose.connect('mongodb://localhost/news');
+
+//const Presupuesto = mongoose.model("presupuesto");
+const Presupuesto = require('../Models/modeloPresupuesto');
+
 const Gasto = require("../Models/modeloGastos");
 
 exports.formularioNuevaGasto = (req, res) => {
-    res.render("presupuesto/nuevoGasto", {
-      nombrePagina: "Nueva gasto",
-      tagline: "Llena el formulario y publica una nueva gasto",
-      cerrarSesion: true,
-      nombre: req.user.nombre
+    res.render("presupuesto/nuevoGasto:url", {
+      nombrePagina: "Nuevo gasto",
+      tagline: "Llena el formulario y publica un nueva gasto"
     });
   };
   // Opciones de querys Mongoose para CRUDS
   // https://mongoosejs.com/docs/queries.html
   
   // Agregar una nueva gasto a la base de datos
-  exports.agregarGasto = async (req, res) => {
+  exports.agregarGasto = async (req, res, next) => {
+    const usuarioO = req.user;
+    const presupuesto = await Presupuesto.findOne({ url: req.params.url });
+    if (!presupuesto) return next();
+
     const gasto = new Gasto(req.body);
-  
+    gasto.presupuesto = presupuesto._id;
     // Agregrando el usuario que crea la gasto
-    gasto.nombre = req.user._id;
-  
-    // Crear el arreglo de skills
-  
+    gasto.usuario = usuarioO._id;
     // Almacenar en la base de datos
-    const nuevaGasto = await gasto.save();
+    const nuevoGasto = await gasto.save();
   
     // Redireccionar
-    res.redirect(`presupuesto/gasto/${nuevaGasto.url}`);
+    res.redirect(`presupuesto/nuevoGasto/${presupuesto.url}`);
   };
   
   // Mostrar una gasto

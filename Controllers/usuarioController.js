@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-//const Usuario = mongoose.model("Usuario");
+mongoose.connect('mongodb://localhost/news');
+//const Usuario = mongoose.model("usuario");
 const { validationResult } = require("express-validator");
 const Usuario = require('../Models/modeloUsuario');
 
@@ -43,12 +44,12 @@ exports.agregarUsuario = async (req, res, next) => {
     //console.log(usuario);
 
     req.flash("success", ['El usuario registrado exitosamente']);
- // renderizar la página con los errores
- res.render("user/iniciarSesion", {
-  nombrePagina: "Crear cuenta en Master Presupuesto",
-  tagline: "¡Haz tu presupuesto de forma gratuita!",
-  messages: req.flash()
-});
+    // renderizar la página con los errores
+    res.render("user/iniciarSesion", {
+    nombrePagina: "Crear cuenta en Master Presupuesto",
+    tagline: "¡Haz tu presupuesto de forma gratuita!",
+    message: req.flash()
+      });
   } catch (error) {
     // Ingresar el error al arreglo de errores
     erroresArray.push(error);

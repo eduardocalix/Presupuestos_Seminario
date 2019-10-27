@@ -1,26 +1,13 @@
 const passport = require("passport");
-//const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 //const Vacante = mongoose.model("Vacante");
 
 exports.autenticarUsuario = passport.authenticate("local", {
   successRedirect: "presupuesto/nuevoPresupuesto",
   failureRedirect: "user/iniciarSesion",
+  failureFlash: true,
   badRequestMessage: ["Debes ingresar ambos campos"]
 });
-
-/* // Mostrar el panel de administración (Dashboard)
-exports.administrarVacantes = async (req, res) => {
-  // Obtener el usuario autenticado
-  const vacantes = await Vacante.find({ autor: req.user._id });
-
-  res.render("administracion", {
-    nombrePagina: "Panel de administración",
-    tagline: "Crea y administra tus vacantes desde aquí",
-    cerrarSesion: true,
-    nombre: req.user.nombre,
-    vacantes
-  });
-}; */
 
 // Cerrar la sesión del usuario actual
 exports.cerrarSesion = (req, res) => {

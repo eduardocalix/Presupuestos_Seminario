@@ -27,7 +27,16 @@ const usuarioSchema = new mongoose.Schema({
     default: 0,
     trim: true
   },
- 
+  ocupacion: {
+    type: String,
+    trim: true
+  },
+  /* imagen: {
+    type: String,
+    trim: true,
+    default: "defecto.jpg"
+  }, */
+
   contrasena: {
     type: String,
     required: true,
@@ -36,6 +45,8 @@ const usuarioSchema = new mongoose.Schema({
   token: String,
   expira: Date
 });
+
+
 // Hooks (método) para hash + salt contrasena
 usuarioSchema.pre("save", function(next) {
   const user = this;
@@ -97,4 +108,4 @@ usuarioSchema.methods.comparecontrasena = function(candidatePassword) {
   }).catch();
 };
 
-module.exports = mongoose.model("Usuario", usuarioSchema);
+module.exports = mongoose.model("usuario", usuarioSchema);

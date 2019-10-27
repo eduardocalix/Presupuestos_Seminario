@@ -24,8 +24,8 @@ module.exports = () => {
         .isEmpty()
         .escape(),
       check("correo", "El correo electrónico es requerido.")
-        .not()
-        .isEmpty(),
+        .isEmail()
+        .normalizeEmail(),
       check("telefono", "El telefono no es vålido.")
         .not()
         .isEmpty(),
@@ -44,7 +44,7 @@ module.exports = () => {
   );
  router.post("/iniciarSesion", authController.autenticarUsuario);
  // Cerrar sesión
- router.get("/cerrarSesion", authController.cerrarSesion);
+ router.get("/cerrarSesion", authController.verificarUsuario,authController.cerrarSesion);
  //Presupuestos
   //router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
  //router.post("/nuevoPresupuesto", presupuestoController.crearPresupuesto);

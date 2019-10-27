@@ -1,19 +1,11 @@
 const mongoose = require("mongoose");
-const { validationResult } = require("express-validator");
+mongoose.connect('mongodb://localhost/news');
 //const Presupuesto = mongoose.model("presupuesto");
 const Presupuesto = require('../Models/modeloPresupuesto');
 //const Vacante = mongoose.model("Vacante");
 const { isAuthenticated } = require('../helpers/auth');
 
 exports.homePresupuesto = async (req, res, next) => {
-  // Obtener todos los documentos de las vacantes
-  //const vacantes = await Vacante.find();
-
- /*  console.log(vacantes);
-
-  // Si no hay vacantes
-  if (!vacantes) return next(); */
-
   res.render("inicio", {
     nombrePagina: " MasterPresupuesto",
     tagline: "Realiza tu presupuesto en nuetra App"
@@ -21,35 +13,39 @@ exports.homePresupuesto = async (req, res, next) => {
 };
 
 exports.formularioPresupuesto =  async (req, res, next) => {
-  if (isAuthenticated){
+ 
   res.render("presupuesto/nuevoPresupuesto", {
-    nombrePagina: "Nuevo Presupuesto",
+    nombrePagina: "Nuevo presupuesto",
     tagline: "Realiza tu presupuesto en nuetra App"
   });
-  req.flash("success", ["Bienvenido"]);}
+  req.flash("success", ["Bienvenido"]);
 };
+
 
 
   // Agregar una nueva presupuesto a la base de datos
   exports.agregarPresupuesto = async (req, res) => {
+    const usuarioO = req.user;
+    console.log("estos son los datos qwue tra el presupuesto");
+    console.log(req.body);
+  
     const presupuesto = new Presupuesto(req.body);
   
     // Agregrando el usuario que crea la presupuesto
-    presupuesto.autor = req.user._id;
-  
-    // Crear el arreglo de skills
-    presupuesto.skills = req.body.skills.split(",");
+    presupuesto.usuario = usuarioO._id;
   
     // Almacenar en la base de datos
-    const nuevaPresupuesto = await presupuesto.save();
+    const nuevoPresupuesto = await presupuesto.save();
   
     // Redireccionar
-    res.redirect(`/presupuesto/${nuevaPresupuesto.url}`);
+   res.redirect(`presupuesto/nuevoGasto/${nuevoPresupuesto.url}`);
   };
   
   // Mostrar una presupuesto
   exports.mostrarPresupuesto = async (req, res, next) => {
-    const presupuesto = await Presupuesto.findOne({ url: req.params.url });
+    
+    const usuarioO = req.user;
+    const presupuesto = await Presupuesto.find({ usuario: usuarioO._id });
   
     // Si no hay resultados
     if (!presupuesto) return next();
@@ -63,39 +59,48 @@ exports.formularioPresupuesto =  async (req, res, next) => {
   
   // Muestra el formulario para editar una presupuesto
   exports.formularioEditarPresupuesto = async (req, res, next) => {
+    const usuarioO = req.user;
+    
+    
     const presupuesto = await Presupuesto.findOne({ url: req.params.url });
   
     // Si no existe la presupuesto
     if (!presupuesto) return next();
+        const lasCategorias = await Categoria.find({
+        registradoPor: elUsuario._id,
+        estado: 1
+      });
   
+    // Si no existen categorias
+    if (!lasCategorias) return next();
+
     res.render("editarPresupuesto", {
-      nombrePagina: `Editar ${presupuesto.titulo}`,
+      nombrePagina: 'Editar presupuesto',
       presupuesto,
-      cerrarSesion: true,
+      //cerrarSesion: true,
+      usuarioO,
       nombre: req.user.nombre
     });
   };
   
   // Almacenar una presupuesto editada
   exports.editarPresupuesto = async (req, res, next) => {
-    const presupuestoEditada = req.body;
+    const presupuestoEditado = req.body;
   
-    // Convertir las skills a un arreglo de skills
-    presupuestoEditada.skills = req.body.skills.split(",");
-  
-    console.log(presupuestoEditada);
-  
+    console.log(presupuestoEditado);
+    const usuarioO = req.user;
+    presupuestoEditado.usuario=usuarioO._id;
     // Almacenar la presupuesto editada
     const presupuesto = await Presupuesto.findOneAndUpdate(
       { url: req.params.url },
-      presupuestoEditada,
+      presupuestoEditado,
       {
         new: true,
         runValidators: true
       }
     );
   
-    res.redirect(`/presupuesto/${presupuesto.url}`);
+    res.redirect('/presupuesto/mostrarPresupuesto');
   };
   
   // Eliminar una presupuesto
@@ -117,7 +122,7 @@ exports.formularioPresupuesto =  async (req, res, next) => {
   
   // Verificar que el autor de una presupuesto sea el usuario enviado
   const verificarUsuario = (presupuesto = {}, usuario = {}) => {
-    if (!presupuesto.autor.equals(usuario._id)) {
+    if (!presupuesto.usuario.equals(usuario._id)) {
       return false;
     }
   

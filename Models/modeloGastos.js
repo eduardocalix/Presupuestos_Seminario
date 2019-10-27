@@ -13,7 +13,15 @@ const gastoSchema = new mongoose.Schema({
     trim: true,
     required: "El nombre del gasto es requerido"
   },
-  /* gastoEsperado:  {
+  presupuesto:{
+    type: String,
+    trim: true
+  },
+  usuario:{
+    type: String,
+    trim: true
+  },
+  gastoEsperado:  {
     type: Number,
     required: " El gasto Esperado es requerido"
   },
@@ -22,11 +30,11 @@ const gastoSchema = new mongoose.Schema({
     required: " El gasto Real es requerido",
     trim: true
   },
-  ,
+  
   diferencia: {
     type: Number,
     trim: true
-  }, */
+  }, 
   descripcion: {
     type: String,
     trim: true
@@ -45,4 +53,4 @@ gastoSchema.pre("save", function(next) {
   next();
 });
 
-module.exports = mongoose.model("Gasto", gastoSchema);
+module.exports = mongoose.model("gasto", gastoSchema);

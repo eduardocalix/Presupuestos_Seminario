@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
+const { check } = require("express-validator");
 //controllers
 const presupuestoController = require("../Controllers/presupuestoController");
+const usuarioController = require("../Controllers/usuarioController");
 const authController = require("../Controllers/authController");
 const gastoController = require("../Controllers/gastoController");
 
 // Models
 
 // Helpers
-const { check } = require("express-validator");
+
 
 module.exports = () => {
     router.get("/", presupuestoController.homePresupuesto);
@@ -16,8 +18,7 @@ module.exports = () => {
     router.get("/nuevoPresupuesto", presupuestoController.formularioPresupuesto);
  //router.post("/nuevoPresupuesto", presupuestoController.autenticarUsuario);
 
- router.post(
-  "/nuevoPresupuesto",
+ router.post("/nuevoPresupuesto",
   authController.verificarUsuario,
   presupuestoController.agregarPresupuesto
 );
