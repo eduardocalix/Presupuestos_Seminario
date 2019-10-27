@@ -1,12 +1,18 @@
+<div class="container">
+  <br><br><br><br><br>
 <div class="row">
   {{#each gastos}}
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title d-flex justify-content-between align-items-center">
-          {{ nombre }} <a href="/editiarGasto/{{_id}}"><i class="fas fa-edit"></i></a>
+          {{ nombre }} <a href="/editarGasto/{{url}}"><i class="fas fa-edit"></i></a>
         </h4>
+        <p>Gasto esperado: {{ gastoEsperado }}</p>
+        <p>Gasto real: {{ gastoReal }}</p>
+        <p>Diferencia: {{ diferencia }}</p>
         <p>{{ descripcion }}</p>
+
         <!--Parte del formulario para eliminar -->
         <form action="/delete/{{_id}}?_method=DELETE" method="POST">
           <input type="hidden" name="_method" value="DELETE">
@@ -24,4 +30,5 @@
     </div>
   </div>
   {{/each}}
+</div>
 </div>

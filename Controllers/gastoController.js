@@ -7,13 +7,12 @@ const Usuario = require('../Models/modeloUsuario');
 
 const Gasto = require("../Models/modeloGastos");
 
-exports.formularioNuevaGasto = (req, res) => {
-  
-
+exports.formularioNuevaGasto = async (req, res) => {
+  const presupuesto = await Presupuesto.findOne({ url: req.params.url });
     res.render("presupuesto/nuevoGasto", {
       nombrePagina: "Nuevo gasto",
-      tagline: "Llena el formulario y publica un nueva gasto"
-
+      tagline: "Llena el formulario y publica un nueva gasto",
+      presupuesto
     });
   };
   // Opciones de querys Mongoose para CRUDS
@@ -24,16 +23,18 @@ exports.formularioNuevaGasto = (req, res) => {
     const usuarioO = req.user;
     const presupuesto = await Presupuesto.findOne({ url: req.params.url });
     if (!presupuesto) return next();
-
+    var diferencia = 0;
     const gasto = new Gasto(req.body);
     gasto.presupuesto = presupuesto._id;
     // Agregrando el usuario que crea la gasto
     gasto.usuario = usuarioO._id;
+    diferencia= req.body.gastoEsperado - req.body.gastoReal;
+    gasto.diferencia= diferencia;
     // Almacenar en la base de datos
     const nuevoGasto = await gasto.save();
   
     // Redireccionar
-    res.redirect("/nuevoGasto",req.params.url );
+    res.redirect("/mostrarGasto");
   };
   
   // Mostrar una gasto
@@ -43,7 +44,7 @@ exports.formularioNuevaGasto = (req, res) => {
     // Si no hay resultados
     if (!gastos) return next();
   
-    res.render("presupuesto/mostrarGastos", {
+    res.render("presupuesto/mostrarGasto", {
       nombrePagina: "Gastos",
       gastos
     });
@@ -56,34 +57,37 @@ exports.formularioNuevaGasto = (req, res) => {
     // Si no existe la gasto
     if (!gasto) return next();
   
-    res.render("editarGasto", {
-      nombrePagina: `Editar ${gasto.titulo}`,
+    res.render("presupuesto/editarGasto", {
+      nombrePagina: `Editar ${gasto.nombre}`,
       gasto,
-      cerrarSesion: true,
-      nombre: req.user.nombre
+      cerrarSesion: true
     });
   };
   
   // Almacenar una gasto editada
   exports.editarGasto = async (req, res, next) => {
-    const gastoEditada = req.body;
+    const gastoEditado = req.body;
   
-    // Convertir las skills a un arreglo de skills
-    gastoEditada.skills = req.body.skills.split(",");
-  
-    console.log(gastoEditada);
-  
+    console.log(gastoEditado);
+    const usuarioO = req.user;
+    var diferencia = 0;
+
+    gastoEditado.usuario=usuarioO._id;
+    gastoEditado.presupuesto= req.params._id;
+    diferencia= req.body.gastoEsperado - req.body.gastoReal;
+    gastoEditado.diferencia= diferencia;
     // Almacenar la gasto editada
     const gasto = await Gasto.findOneAndUpdate(
+
       { url: req.params.url },
-      gastoEditada,
+      gastoEditado,
       {
         new: true,
         runValidators: true
       }
     );
-  
-    res.redirect(`/gasto/${gasto.url}`);
+    res.redirect("/mostrarGasto");
+    //res.redirect(`/gasto/${gasto.url}`);
   };
   
   // Eliminar una gasto

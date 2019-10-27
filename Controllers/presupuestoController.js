@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //const Presupuesto = mongoose.model("presupuesto");
 const Presupuesto = require('../Models/modeloPresupuesto');
+const Gastos = require("../Models/modeloGastos");
 //const Vacante = mongoose.model("Vacante");
 const { isAuthenticated } = require('../helpers/auth');
 const Usuario = require('../Models/modeloUsuario');
@@ -50,12 +51,50 @@ exports.formularioPresupuesto =  async (req, res, next) => {
     // Si no hay resultados
     if (!presupuestos) return next();
     console.log(usuario);
+    var resultado = 0;
+    const nombre= usuario.nombre;
+    const gastos = await Gastos.find({ usuario: usuarioO._id });    
+    if (!gastos){
+      req.flash("error","no hay gastos todavía");
+      console.log("no hay gastos");
+      resultado="no hay gastos todavía";
+      const porcentaje=0;
+      const total =0;
+    console.log(nombre);
+
+      res.render("presupuesto/mostrarPresupuesto", {
+        nombrePagina: "Presupuestos",
+        presupuestos,
+        usuario,
+        total,
+        resultado,
+        porcentaje
+      });
+    }else{
+   // console.log(nombre);
+
+    //Calcular el total de los gastos
+    var gasto = 0;
+    for (i in gastos) {
+      gasto += gastos[i].gastoReal;
+    }
+    //Vemos si el presupuesto alcanza
+    const total = usuario.ingresoMensual - gasto;
+    if (total > 0) {
+      resultado = "El presupuesto del mes está en lo establecido";
+    } else {
+      resultado = "Se contabilizó una pérdida";
+    }
+    const porcentaje = ((total / usuario.ingresoMensual) * 100).toFixed(2);
   
     res.render("presupuesto/mostrarPresupuesto", {
       nombrePagina: "Presupuestos",
       presupuestos,
-      usuario
-    });
+      usuario,
+      total,
+      resultado,
+      porcentaje
+    });}
   };
   
   // Muestra el formulario para editar una presupuesto

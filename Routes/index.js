@@ -79,16 +79,15 @@ router.delete("/eliminar/:id", presupuestoController.eliminarPresupuesto);
 
 
 //Agregar un gasto
-router.get("/nuevoGasto", gastoController.agregarGasto);
+router.get("/nuevoGasto/:url", gastoController.formularioNuevaGasto);
 
-router.post(
-"/nuevoGasto/:url",
+router.post("/nuevoGasto/:url",
 authController.verificarUsuario,
 gastoController.agregarGasto
 );
 
 // Mostrar los gastos
-router.get("/mostrarGasto/", gastoController.mostrarGastos);
+router.get("/mostrarGasto", gastoController.mostrarGastos);
 
 // Editar una gasto
 router.get(

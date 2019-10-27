@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
                             <div class="col-md-12">
-                                <input name="fecha" type="date" placeholder="fecha" class="form-control">
+                                <input name="fecha" type="date" value='{{presupuesto.fecha}}' placeholder="fecha" class="form-control">
                             </div>
                         </div>
 
@@ -26,7 +26,7 @@
                             <div class="col-md-12">
                             {{!-- <input name="mes" type="text" placeholder="Ingrese el mes" class="form-control"> --}}
                             <label for="fecha" >Fecha</label>
-                            <input type="month" min="2019-10" name="mes" id="fecha" placeholder="Ingresa el mes" class="form-control"/>
+                            <input type="month" min="2019-10" name="mes" id="fecha" value='{{presupuesto.mes}}' placeholder="Ingresa el mes" class="form-control"/>
                             
                           
                             </div>
@@ -37,7 +37,7 @@
                             <div class="col-md-12">
                                 {{!-- Implementar un WYSIWYG --}}
                                 <label>Descripción</label>
-                                <input type="hidden" name="descripcion" id="x" >
+                                <input type="hidden" name="descripcion" id="x" value='{{presupuesto.descripcion}}'>
                                 <trix-editor input="x" class="form-control"></trix-editor>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <div class="col-md-12 text-center">
                                 <br>
-                                <button type="submit" class="btn btn-primary btn-lg">Calcular Presupuesto</button>
+                                <button type="submit" class="btn btn-primary btn-lg">Editar Presupuesto</button>
                             </div>
                         </div>
                     </fieldset>

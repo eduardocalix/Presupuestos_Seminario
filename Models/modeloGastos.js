@@ -26,7 +26,7 @@ const gastoSchema = new mongoose.Schema({
     required: " El gasto Esperado es requerido"
   },
   gastoReal: {
-    type: String,
+    type: Number,
     required: " El gasto Real es requerido",
     trim: true
   },
