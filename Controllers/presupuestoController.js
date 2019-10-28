@@ -39,12 +39,11 @@ exports.formularioPresupuesto =  async (req, res, next) => {
     const nuevoPresupuesto = await presupuesto.save();
   
     // Redireccionar
-   res.redirect("/nuevoGasto",nuevoPresupuesto);
+   res.redirect("/mostrarPresupuesto");
   };
   
   // Mostrar una presupuesto
   exports.mostrarPresupuesto = async (req, res, next) => {
-    
     const usuarioO = req.user;
     const presupuestos = await Presupuesto.find({ usuario: usuarioO._id });
     const usuario = await Usuario.findOne({ _id: usuarioO._id });    
@@ -53,13 +52,15 @@ exports.formularioPresupuesto =  async (req, res, next) => {
     console.log(usuario);
     var resultado = 0;
     const nombre= usuario.nombre;
-    const gastos = await Gastos.find({ usuario: usuarioO._id });    
+    var total = 0;
+    var porcentaje =0;
+    const gastos = await Gastos.find({presupuesto: presupuestos._id});    
     if (!gastos){
+      total =0;
       req.flash("error","no hay gastos todavía");
       console.log("no hay gastos");
       resultado="no hay gastos todavía";
-      const porcentaje=0;
-      const total =0;
+      
     console.log(nombre);
 
       res.render("presupuesto/mostrarPresupuesto", {
@@ -71,22 +72,44 @@ exports.formularioPresupuesto =  async (req, res, next) => {
         porcentaje
       });
     }else{
+      total =0;
    // console.log(nombre);
-
+   for (a in presupuestos) {
+    
+  
     //Calcular el total de los gastos
+    const gastos1 = await Gastos.find({presupuesto: presupuestos[a]._id});    
+
     var gasto = 0;
-    for (i in gastos) {
-      gasto += gastos[i].gastoReal;
+    for (i in gastos1) {
+      gasto += gastos1[i].gastoReal;
     }
     //Vemos si el presupuesto alcanza
-    const total = usuario.ingresoMensual - gasto;
+    total = presupuestos[a].ingresoMensual - gasto;
     if (total > 0) {
       resultado = "El presupuesto del mes está en lo establecido";
     } else {
       resultado = "Se contabilizó una pérdida";
     }
-    const porcentaje = ((total / usuario.ingresoMensual) * 100).toFixed(2);
-  
+     porcentaje = ((total / presupuestos[a].ingresoMensual) * 100).toFixed(2);
+     console.log(porcentaje);
+    //
+    presupuestos[a].usuario=usuarioO._id;
+    presupuestos[a].mes=presupuestos[a].mes;
+    presupuestos[a].ingresoMensual=presupuestos[a].ingresoMensual;
+    presupuestos[a].fecha=presupuestos[a].fecha;
+    presupuestos[a].descripcion=presupuestos[a].descripcion;
+    presupuestos[a].totalPresupuesto=total;
+    // Almacenar la presupuesto editada
+    const presupuesto1 = await Presupuesto.findOneAndUpdate(
+      { url: req.params.url },
+      presupuestos[a],
+      {
+        new: true,
+        runValidators: true
+      }
+    );}
+
     res.render("presupuesto/mostrarPresupuesto", {
       nombrePagina: "Presupuestos",
       presupuestos,
@@ -137,9 +160,13 @@ exports.formularioPresupuesto =  async (req, res, next) => {
   exports.eliminarPresupuesto = async (req, res) => {
     // Obtener el id de la presupuesto
     const { id } = req.params;
-  
-    const presupuesto = await Presupuesto.findById(id);
-  
+    const presupuesto = await Presupuesto.findByIdAndDelete(req.params._id);
+    req.flash('success_msg', 'Presupuesto eliminado correctamente');
+    presupuesto.remove();
+    res.redirect('/mostrarPresupuesto');
+
+    //const presupuesto = await Presupuesto.findById(id);
+  /* 
     if (verificarUsuario(presupuesto, req.user)) {
       // El usuario es el autor de la presupuesto
       presupuesto.remove();
@@ -148,13 +175,14 @@ exports.formularioPresupuesto =  async (req, res, next) => {
       // El usuario no es el autor, no permitir eliminación
       res.status(403).send("Error al momento de eliminar la presupuesto");
     }
+
   };
   
   // Verificar que el autor de una presupuesto sea el usuario enviado
-  const verificarUsuario = (presupuesto = {}, usuario = {}) => {
-    if (!presupuesto.usuario.equals(usuario._id)) {
+  const verificarUsuario = (presupuesto = {}) => {
+    if (!presupuesto.usuario.equals(req.user._id)) {
       return false;
     }
   
     return true;
-  };
+   */};

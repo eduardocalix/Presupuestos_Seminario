@@ -25,7 +25,9 @@ exports.formularioNuevaGasto = async (req, res) => {
     if (!presupuesto) return next();
     var diferencia = 0;
     const gasto = new Gasto(req.body);
+    console.log(presupuesto._id);
     gasto.presupuesto = presupuesto._id;
+    const id =presupuesto._id;
     // Agregrando el usuario que crea la gasto
     gasto.usuario = usuarioO._id;
     diferencia= req.body.gastoEsperado - req.body.gastoReal;
@@ -34,12 +36,12 @@ exports.formularioNuevaGasto = async (req, res) => {
     const nuevoGasto = await gasto.save();
   
     // Redireccionar
-    res.redirect("/mostrarGasto");
+    res.redirect(`/mostrarGasto/${{id}}`);
   };
   
   // Mostrar una gasto
   exports.mostrarGastos = async (req, res, next) => {
-    const gastos = await Gasto.find();
+    const gastos = await Gasto.find({presupuesto: req.params._id});
   
     // Si no hay resultados
     if (!gastos) return next();
@@ -74,6 +76,7 @@ exports.formularioNuevaGasto = async (req, res) => {
 
     gastoEditado.usuario=usuarioO._id;
     gastoEditado.presupuesto= req.params._id;
+    const id=req.params._id;
     diferencia= req.body.gastoEsperado - req.body.gastoReal;
     gastoEditado.diferencia= diferencia;
     // Almacenar la gasto editada
@@ -86,32 +89,22 @@ exports.formularioNuevaGasto = async (req, res) => {
         runValidators: true
       }
     );
-    res.redirect("/mostrarGasto");
+    res.redirect(`/mostrarGasto/${{id}}`);
+    //res.redirect("/mostrarGasto");
     //res.redirect(`/gasto/${gasto.url}`);
   };
   
   // Eliminar una gasto
   exports.eliminarGasto = async (req, res) => {
     // Obtener el id de la gasto
-    const { id } = req.params;
+    const gasto = await Gasto.findByIdAndDelete(req.params._id);
+    req.flash('success_msg', 'Presupuesto eliminado correctamente');
+    gasto.remove();
+    const presupuesto = await Presupuesto.findById(id);
+    const id= presupuesto._id;
+    res.redirect(`/mostrarGasto/${{id}}`);
+    
   
-    const gasto = await Gasto.findById(id);
-  
-    if (verificarUsuario(gasto, req.user)) {
-      // El usuario es el autor de la gasto
-      gasto.remove();
-      res.status(200).send("La gasto ha sido eliminada correctamente");
-    } else {
-      // El usuario no es el autor, no permitir eliminación
-      res.status(403).send("Error al momento de eliminar la gasto");
-    }
   };
   
-  // Verificar que el autor de una gasto sea el usuario enviado
-  const verificarUsuario = (gasto = {}, usuario = {}) => {
-    if (!gasto.autor.equals(usuario._id)) {
-      return false;
-    }
   
-    return true;
-  };

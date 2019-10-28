@@ -75,7 +75,7 @@ presupuestoController.editarPresupuesto
 );
 
 // Eliminar un presupuesto
-router.delete("/eliminar/:id", presupuestoController.eliminarPresupuesto);
+router.post("/delete/:_id", presupuestoController.eliminarPresupuesto);
 
 
 //Agregar un gasto
@@ -87,7 +87,7 @@ gastoController.agregarGasto
 );
 
 // Mostrar los gastos
-router.get("/mostrarGasto", gastoController.mostrarGastos);
+router.get("/mostrarGasto/:_id", gastoController.mostrarGastos);
 
 // Editar una gasto
 router.get(
@@ -102,6 +102,6 @@ gastoController.editarGasto
 );
 
 // Eliminar una gasto
-router.delete("/eliminar/:id", gastoController.eliminarGasto);
+router.delete("/delete/:_id", gastoController.eliminarGasto);
   return router;
 };

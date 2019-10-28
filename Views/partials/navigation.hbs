@@ -8,7 +8,7 @@
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
         {{#if user}}
          <li class="navbar-brand">
-          <a class="nav-link js-scroll-trigger" href="/Profile">{{user.nombre}}</a>
+          <a class="nav-link js-scroll-trigger" href="/Perfil">{{user.nombre}}</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -23,7 +23,7 @@
             <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a> --}}
           </div>
         </li>
-         <li class="nav-item dropdown">
+         {{!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
           Gastos
@@ -33,7 +33,7 @@
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/nuevoGasto">Agregar un gasto</a>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="/profile">Perfil</a>
         </li>
@@ -42,17 +42,17 @@
         </li>
         
         {{else}}
-          <li class="nav-item dropdown">
+          {{!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
           Presupuestos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/articles/listAll">Todos los presupuestos</a>
+            <a class="dropdown-item" href="/mostrarPresupuesto">Todos los presupuestos</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/articles/add">Agregar un presupuesto</a>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="/iniciarSesion">Iniciar Sesión</a>
         </li>

@@ -18,7 +18,7 @@ exports.cerrarSesion = (req, res) => {
     "Has cerrado tu sesión correctamente. ¡Vuelve pronto!"
   ]);
 
-  return res.redirect("user/iniciarSesion");
+  return res.redirect("/iniciarSesion");
 };
 
 // Verificar si el usuario se encuentra autenticado
@@ -29,5 +29,5 @@ exports.verificarUsuario = (req, res, next) => {
   }
 
   // Si no se autenticó, redirecccionarlo al inicio de sesión
-  res.redirect("user/iniciarSesion");
+  res.redirect("/iniciarSesion");
 };

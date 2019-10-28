@@ -6,26 +6,23 @@
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-      {{#if usuario}}
-        <div class="card-title d-flex justify-content-between align-items-center">
-          <span>Usuario: {{usuario.nombre}}</span>
-        </div>
-       {{/if}} 
-
         <h4 class="card-title d-flex justify-content-between align-items-center">
           El mes: {{ mes }} <br>Ingreso mensual: {{ingresoMensual}}<a href="/editarPresupuesto/{{url}}"><i class="fas fa-edit"></i></a>
         </h4>
-        <p>{{ descripcion }}</p>
+        <p>{{{ descripcion }}}</p>
 
         <h3 class="card-title d-flex justify-content-between align-items-center">El total final es: {{totalPresupuesto}}</h3>
-      {{#if porcentaje}}
-        <span><h3 class="card-title d-flex justify-content-between align-items-center">con un porcentaje de: {{porcentaje}}</h3></span>
-       {{/if}}         
-        !-- Parte de eliminar -->
-        <form action="/delete/{{_id}}?_method=DELETE" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
+      
+        <div class="card-title d-flex justify-content-between align-items-center">con un porcentaje de: <span>{{porcentaje}} %</span></div>
+             
+        
+        <form action="/delete/{{_id}}" method="POST">
+          {{!-- <input type="hidden" name="_method" value="DELETE"> --}}
           <button type="submit" class="btn btn-danger btn-block btn-sm">Eliminar</button>
         <span><p>{{resultado}}</p></span>
+        <br>
+        <p>Ver gastos este presupuesto</p>
+      <a href="/mostrarGasto/{{_id}}" class="btn btn-success btn-block">Ver los gastos</a>
         <br><br>
         <p>Desea incluir más gastos para este presupuesto</p>
       <a href="/nuevoGasto/{{url}}" class="btn btn-success btn-block">Crear un gasto</a>
