@@ -1,0 +1,45 @@
+<div class="container">
+  <br><br><br><br><br>
+
+<div class="row">
+  {{#each presupuestos}}
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title d-flex justify-content-between align-items-center">
+          El mes: {{ mes }} <br>Ingreso mensual: {{ingresoMensual}}<a href="/editarPresupuesto/{{url}}"><i class="fas fa-edit"></i></a>
+        </h4>
+        <p>{{{ descripcion }}}</p>
+
+        <h3 class="card-title d-flex justify-content-between align-items-center">El total final es: {{totalPresupuesto}}</h3>
+      
+        <div class="card-title d-flex justify-content-between align-items-center">con un porcentaje de: <span>{{porcentaje}} %</span></div>
+             
+        
+        <form action="/delete/{{_id}}" method="POST">
+          {{!-- <input type="hidden" name="_method" value="DELETE"> --}}
+          <button type="submit" class="btn btn-danger btn-block btn-sm">Eliminar</button>
+        <span><p>{{resultado}}</p></span>
+        <br>
+        <p>Ver gastos este presupuesto</p>
+      <a href="/mostrarGasto/{{_id}}" class="btn btn-success btn-block">Ver los gastos</a>
+        <br><br>
+        <p>Desea incluir más gastos para este presupuesto</p>
+      <a href="/nuevoGasto/{{url}}" class="btn btn-success btn-block">Crear un gasto</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{else}}
+  <div class="card mx-auto">
+    <div class="card-body">
+      <h1>Hola {{usuario.nombre}}</h1>
+      <p clsss="lead">Todavía no tienes presupuestos mensuales hechos!</p>
+      <a href="/nuevoPresupuesto" class="btn btn-success btn-block">Crear un presupuesto</a>
+    </div>
+  </div>
+  {{/each}}
+</div>
+</div>
