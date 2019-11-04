@@ -103,5 +103,16 @@ gastoController.editarGasto
 
 // Eliminar una gasto
 router.delete("/delete/:_id", gastoController.eliminarGasto);
-  return router;
+
+
+ // Reestablecer la contraseña del usuario
+ router.get("/reestablecer",authController.formularioReestablecerContrasena);
+router.post("/reestablecer", authController.enviarToken);
+router.get("/reestablecer/:token",authController.formularioNuevoContrasena);
+router.post("/reestablecer/:token",authController.almacenarNuevaContrasena);
+
+// Buscador
+//router.post("/buscador", vacanteController.buscarVacantes);
+return router;
+
 };
