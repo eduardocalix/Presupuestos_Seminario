@@ -1,6 +1,8 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
 const Usuario = mongoose.model("usuario");
+const crypto = require("crypto");
+const enviarEmail = require("../handlers/email");
 
 exports.autenticarUsuario = passport.authenticate("local", {
   successRedirect: "/nuevoPresupuesto",
@@ -14,9 +16,7 @@ exports.cerrarSesion = (req, res) => {
   // Cierra la sesión actual
   req.logout();
 
-  req.flash("success", [
-    "Has cerrado tu sesión correctamente. ¡Vuelve pronto!"
-  ]);
+  req.flash("success", ["Has cerrado tu sesión correctamente. ¡Vuelve pronto!" ]);
 
   return res.redirect("/iniciarSesion");
 };
@@ -45,7 +45,7 @@ exports.formularioReestablecerContrasena = (req, res) => {
 exports.enviarToken = async (req, res) => {
   // Verificar si el correo electrónico es válido
   const usuario = await Usuario.findOne({ correo: req.body.correo });
-
+  //console.log(usuario);
   // Si el usuario no existe
   if (!usuario) {
     req.flash("error", ["El correo electrónico ingresado no existe"]);
@@ -54,7 +54,7 @@ exports.enviarToken = async (req, res) => {
 
   // El usuario existe, generar el token
   usuario.token = crypto.randomBytes(20).toString("hex");
-  usuario.expira = Date.now() + 3600000;
+  usuario.expira = Date.now() + 36000;
 
   // Guardar el usuario
   await usuario.save();
@@ -117,7 +117,7 @@ exports.almacenarNuevaContrasena = async (req, res) => {
   }
 
   // Obtener el nuevo password
-  usuario.password = req.body.password;
+  usuario.contrasena = req.body.contrasena;
   // Limpiar los valores que ya no son requeridos
   usuario.token = undefined;
   usuario.expira = undefined;

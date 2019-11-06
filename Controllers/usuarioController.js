@@ -13,7 +13,7 @@ exports.formularioInicioSesion = (req, res) => {
 
   // Almacena una cuenta de usuario
 exports.agregarUsuario = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
 
   // Verificar que no existan errores de validación
   const errores = validationResult(req);
@@ -42,7 +42,7 @@ exports.agregarUsuario = async (req, res, next) => {
     await usuario.save();
     //console.log(usuario);
 
-    req.flash("success", ['El usuario registrado exitosamente']);
+    req.flash("success", ["El usuario registrado exitosamente"]);
     // renderizar la página con los errores
     res.render("user/iniciarSesion", {
     nombrePagina: "Crear cuenta en Master Presupuesto",

@@ -18,6 +18,9 @@
         
         <form action="/delete/{{_id}}" method="POST">
           {{!-- <input type="hidden" name="_method" value="DELETE"> --}}
+            <p>Ver total presupuesto</p>
+      <a href="/totalPresupuesto/{{_id}}" class="btn btn-success btn-block">Ver resultados</a>
+        <br><br>
           <button type="submit" class="btn btn-danger btn-block btn-sm">Eliminar</button>
         <span><p>{{resultado}}</p></span>
         <br>

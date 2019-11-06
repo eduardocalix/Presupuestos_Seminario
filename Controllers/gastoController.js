@@ -25,7 +25,7 @@ exports.formularioNuevaGasto = async (req, res) => {
     if (!presupuesto) return next();
     var diferencia = 0;
     const gasto = new Gasto(req.body);
-    console.log(presupuesto._id);
+    //console.log(presupuesto._id);
     gasto.presupuesto = presupuesto._id;
     const id =presupuesto._id;
     // Agregrando el usuario que crea la gasto
@@ -70,7 +70,7 @@ exports.formularioNuevaGasto = async (req, res) => {
   exports.editarGasto = async (req, res, next) => {
     const gastoEditado = req.body;
   
-    console.log(gastoEditado);
+    //console.log(gastoEditado);
     const usuarioO = req.user;
     var diferencia = 0;
 
@@ -98,7 +98,7 @@ exports.formularioNuevaGasto = async (req, res) => {
   exports.eliminarGasto = async (req, res) => {
     // Obtener el id de la gasto
     const gasto = await Gasto.findByIdAndDelete(req.params._id);
-    req.flash('success_msg', 'Presupuesto eliminado correctamente');
+    req.flash("success", ["Presupuesto eliminado correctamente"]);
     gasto.remove();
     const presupuesto = await Presupuesto.findById(id);
     const id= presupuesto._id;

@@ -113,6 +113,9 @@ router.post("/reestablecer/:token",authController.almacenarNuevaContrasena);
 
 // Buscador
 //router.post("/buscador", vacanteController.buscarVacantes);
+
+router.get("/totalPresupuesto/:_id",presupuestoController.verTodo);
+
 return router;
 
 };
