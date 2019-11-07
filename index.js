@@ -65,8 +65,8 @@ app.use((req, res, next) => {
   //Estos son los mensajes que hemos creado para las operaciones
   res.locals.message = req.flash('message');
   res.locals.success = req.flash('success');
-  app.locals.errors = req.flash('errors');
-  app.locals.user = req.user;
+  res.locals.errors = req.flash('error');
+  res.locals.user = req.user;
   next();
 });
 
@@ -88,7 +88,7 @@ app.use((error, req, res, next) => {
   res.locals.status = status;
   res.status(status);
 
-  res.render("error", {
+  res.render("noEncontrado", {
     status,
     message: error.message
   });

@@ -185,24 +185,4 @@ exports.formularioPresupuesto =  async (req, res, next) => {
     presupuesto.remove();
     res.redirect('/mostrarPresupuesto');
 
-    //const presupuesto = await Presupuesto.findById(id);
-  /* 
-    if (verificarUsuario(presupuesto, req.user)) {
-      // El usuario es el autor de la presupuesto
-      presupuesto.remove();
-      res.status(200).send("La presupuesto ha sido eliminada correctamente");
-    } else {
-      // El usuario no es el autor, no permitir eliminación
-      res.status(403).send("Error al momento de eliminar la presupuesto");
-    }
-
-  };
-  
-  // Verificar que el autor de una presupuesto sea el usuario enviado
-  const verificarUsuario = (presupuesto = {}) => {
-    if (!presupuesto.usuario.equals(req.user._id)) {
-      return false;
-    }
-  
-    return true;
-   */};
+   };
