@@ -10,8 +10,7 @@ const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
 const passport = require("./Config/passport");
-
-
+const crearError = require("http-errors");
 
 // Habilitando el archivo de variables de entorno
 require("dotenv").config({ path: "variables.env" });
@@ -64,10 +63,10 @@ app.use(flash());
 //variables GLobales
 app.use((req, res, next) => {
   //Estos son los mensajes que hemos creado para las operaciones
-  app.locals.message = req.flash('message');
-  app.locals.success = req.flash('success');
-  app.locals.errors = req.flash('errors');
-  app.locals.user = req.user;
+  res.locals.message = req.flash('message');
+  res.locals.success = req.flash('success');
+  res.locals.errors = req.flash('error');
+  res.locals.user = req.user;
   next();
 });
 
@@ -78,6 +77,22 @@ app.use("/", router());
 //app.use(require('./Routes/index'));
 
 //app.use(require('./Routes/presupuesto.js'));
+// 404
+app.use((req, res, next) => {
+  next(crearError(404, "La página que has solicitado no existe"));
+});
+
+// Administración de los errores
+app.use((error, req, res, next) => {
+  const status = error.status || 500;
+  res.locals.status = status;
+  res.status(status);
+
+  res.render("noEncontrado", {
+    status,
+    message: error.message
+  });
+});
 
 
 //iniciar el servidor

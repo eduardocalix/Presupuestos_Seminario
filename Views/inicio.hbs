@@ -25,7 +25,12 @@
 					</div>
 				</div>
 			</div>
+        {{#if user}}
+
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="nuevoPresupuesto">Crear tu presupuesto</a>
+{{else}}
           <a class="btn btn-primary btn-xl js-scroll-trigger" href="iniciarSesion">Crear tu presupuesto</a>
+{{/if}}
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ exports.formularioInicioSesion = (req, res) => {
 
   // Almacena una cuenta de usuario
 exports.agregarUsuario = async (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
 
   // Verificar que no existan errores de validación
   const errores = validationResult(req);
@@ -42,7 +42,7 @@ exports.agregarUsuario = async (req, res, next) => {
     await usuario.save();
     //console.log(usuario);
 
-    req.flash("success", ['El usuario registrado exitosamente']);
+    req.flash("success", ["El usuario registrado exitosamente"]);
     // renderizar la página con los errores
     res.render("user/iniciarSesion", {
     nombrePagina: "Crear cuenta en Master Presupuesto",
@@ -68,3 +68,40 @@ exports.formularioCrearUsuario = (req, res) => {
       nombrePagina: "Crear cuenta en Master Presupuesto"
     });
   };
+
+  // Mostrar el formulario de editar perfil del usuario
+exports.formularioEditarPerfil = (req, res) => {
+  res.render("editarPerfil", {
+    nombrePagina: "Edita el perfil de tu usuario en DevFinder",
+    usuario: req.user,
+    cerrarSesion: true,
+    nombre: req.user.nombre
+  });
+};
+
+// Almacena los cambios en el perfil del usuario
+exports.editarPerfil = async (req, res) => {
+  // Buscar el usuario
+  const usuario = await Usuario.findById(req.user._id);
+
+  // Modificar los valores
+  usuario.nombre = req.body.nombre;
+  usuario.email = req.body.email;
+
+  if (req.body.password) {
+    usuario.password = req.body.password;
+  }
+
+  // Verificar si el usuario agrega una imagen
+  if (req.file) {
+    usuario.imagen = req.file.filename;
+  }
+
+  // Guardar los cambios
+  await usuario.save();
+
+  req.flash("correcto", ["Cambios almacenados correctamente"]);
+
+  // Redireccionar
+  res.redirect("/administrar");
+};

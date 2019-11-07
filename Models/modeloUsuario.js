@@ -18,7 +18,7 @@ const usuarioSchema = new mongoose.Schema({
   correo: {
     type: String,
     unique:true,
-    required: " El mes es requerido",
+    required: " El correo es requerido",
     lowercase:true,
     trim: true
   },

@@ -1,0 +1,111 @@
+<div class="container" style="align-content: center;">
+  <br><br><br><br><br>
+<div class="center">
+	<div class="col-md-4"></div>
+    <div class="row">
+        <h1>{{ presupuesto.nombre }}</h1>
+    </div>
+    <div class="row"></div>
+        <p>{{{ presupuesto.descripcion }}}</p>
+    </div>
+
+    <br>
+    <div class="row">  
+        <table class="table">
+                
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor estimado</th>
+                <th scope="col">Valor real</th>
+                <th scope="col">Diferencia</th>
+                <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>{{presupuesto.fecha}}</td>
+                <td>Presupuesto inicial</td>
+                <td>------</td>
+                <td id="presupuestoInicial">{{presupuesto.ingresoMensual}}</td>
+                <td>------</td>
+                <td>    </td>
+                
+                </tr>
+            {{#each gastos}}
+                <tr >
+                <td>{{fecha}}</td>
+                <td>{{{descripcion}}}</td>
+                <td id="filaValorEstimado-{{_id}}">{{gastoEsperado}}</td>
+                <td id="filaValorReal-{{_id}}">{{gastoReal}}</td>
+                <td id="diferencia-{{_id}}"></td>
+                <td>
+                    <a href="/detallePresupuesto/editar/{{_id}}"><i class="fas fa-edit"></i></a>
+                    <a href="/detallePresupuesto/eliminar/{{_id}}"><i class="far fa-trash-alt"></i></a>
+                </td>
+                </tr>
+            
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+    <table class="table">
+        <h2>Resumen final del presupuesto</h1>
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">Presupuesto inicial</th>
+        <th scope="col">Total gastos estimados</th>
+        <th scope="col">Total gastos reales</th>
+        <th scope="col">Total final estimado</th>
+        <th scope="col">Total final</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>{{presupuesto.ingresoMensual}}</td>
+        <td id="totalGastosEstimados"></td>
+        <td id="totalGastosReales"></td>
+        <td id="diferenciaTotalEstimada"></td>
+        <td id="diferenciaTotal"></td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+</div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+   $(document).ready(function(){
+     var valorEstimado = 0, valorReal = 0,  totalGastoEstimado = 0, totalGastoReal = 0;
+
+     {{#each gastos}}
+       
+        valorEstimado = $('#filaValorEstimado-{{_id}}').html();
+        valorReal = $('#filaValorReal-{{_id}}').html();
+
+
+        
+          totalGastoEstimado = parseInt(totalGastoEstimado) + parseInt(valorEstimado);
+          totalGastoReal = parseInt(totalGastoReal) + parseInt(valorReal);
+        
+         $('#diferencia-{{_id}}').html(valorEstimado - valorReal);
+        
+     {{/each}}
+     
+     $('#totalGastosEstimados').html(totalGastoEstimado);
+   
+     $('#totalGastosReales').html(totalGastoReal);
+ 
+
+     presuestoinicial = $('#presupuestoInicial').html();
+     $('#diferenciaTotalEstimada').html(parseInt(presuestoinicial) - parseInt(totalGastoEstimado) );
+     $('#diferenciaTotal').html(parseInt(presuestoinicial) - parseInt(totalGastoReal));
+
+   });
+</script>
