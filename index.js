@@ -78,7 +78,10 @@ app.use("/", router());
 //app.use(require('./Routes/index'));
 
 //app.use(require('./Routes/presupuesto.js'));
-
+const host = "0.0.0.0";
+const port = process.env.PORT;
 
 //iniciar el servidor
-app.listen(process.env.PORT);
+app.listen(port,host,() =>{
+console.log("El servidor esta ejecutandose")
+});
