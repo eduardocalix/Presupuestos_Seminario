@@ -95,5 +95,10 @@ app.use((error, req, res, next) => {
 });
 
 
+const host = "0.0.0.0";
+const port = process.env.PORT;
+
 //iniciar el servidor
-app.listen(process.env.PORT);
+app.listen(port,host,() =>{
+console.log("El servidor esta ejecutandose")
+});
