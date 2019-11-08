@@ -4,8 +4,7 @@
   "description": "App para calcular el presupuesto de los usuarios",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index",
-    "watch": "webpack --w --mode development",
+    "dev": "nodemon ./index.js",
     "develop": "concurrently \"npm run dev\" \"npm run watch\"",
     "start": "node ./index.js"
   },
