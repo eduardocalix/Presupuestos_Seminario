@@ -88,7 +88,7 @@ app.use((error, req, res, next) => {
   res.locals.status = status;
   res.status(status);
 
-  res.render("error", {
+  res.render("/errore", {
     status,
     message: error.message
   });
