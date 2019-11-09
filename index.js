@@ -36,7 +36,7 @@ app.engine(
   })
 );
 //Todas las vistas las reconocerá como .hbs
-app.set("Views engine", ".hbs");
+app.set("view engine", ".hbs");
 
 // Definir ruta para archivos estáticos
 app.use(express.static(path.join(__dirname, "Public")));
