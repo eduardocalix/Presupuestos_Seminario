@@ -23,8 +23,7 @@ module.exports = () => {
       // https://express-validator.github.io/docs/index.html
       check("nombre", "El nombre de usuario es requerido.")
         .not()
-        .isEmpty()
-        .escape(),
+        .isEmpty(),
       check("correo", "El correo electrónico es requerido.")
         .isEmail()
         .normalizeEmail(),
@@ -34,7 +33,7 @@ module.exports = () => {
       check("contrasena", "La contraseña es requerida.")
         .not()
         .isEmpty(),
-      check("confirmpassword", "Debe ingresar la confirmación de tu contraseña")
+      check("descripcion", "Debe ingresar la confirmación de tu contraseña")
         .not()
         .isEmpty(),
       check(
