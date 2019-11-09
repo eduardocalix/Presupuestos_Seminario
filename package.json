@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/eduardocalix/Presupuestos_Seminario/issues"
   },
-  "homepage": "https://github.com/eduardocalix/Presupuestos_Seminario.git#readme",
+  "homepage": "https://github.com/eduardocalix/Presupuestos_Seminario#readme",
   "dependencies": {
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
@@ -46,13 +46,14 @@
     "passport-local": "^1.0.0",
     "shortid": "^2.2.15",
     "slug": "^1.1.0",
-    "sweetalert2": "^8.18.4"
+    "sweetalert2": "^8.18.4",
+    "nodemon": "^1.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
-    "nodemon": "^1.19.2",
+    
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
   }
