@@ -2,7 +2,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const Usuario = mongoose.model("usuario");
 const crypto = require("crypto");
-const enviarEmail = require("../handlers/email");
+const enviarEmail = require("../Handlers/email");
 
 exports.autenticarUsuario = passport.authenticate("local", {
   successRedirect: "/nuevoPresupuesto",
