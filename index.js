@@ -28,8 +28,8 @@ app.engine(
   exphbs({
       //El main es la vista principal de todo el proyecto
    // defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
+    layoutsDir: path.join(app.get('Views'), 'layouts'),
+    partialsDir: path.join(app.get('Views'), 'partials'),
     extname: '.hbs',
     defaultLayout: "layout"
    // helpers: require("./helpers/handlebars")
@@ -39,7 +39,7 @@ app.engine(
 app.set("view engine", ".hbs");
 
 // Definir ruta para archivos estáticos
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Public")));
 
 // Creación de la sesión y de la cookie
 app.use(cookieParser());
