@@ -28,15 +28,15 @@ app.engine(
   exphbs({
       //El main es la vista principal de todo el proyecto
    // defaultLayout: 'main',
-    //layoutsDir: path.join(app.get('Views'), 'layouts'),
-    //partialsDir: path.join(app.get('Views'), 'partials'),
+    layoutsDir: path.join(app.get('Views'), 'Layouts'),
+    partialsDir: path.join(app.get('Views'), 'partials'),
     extname: '.hbs',
     defaultLayout: "layout"
    // helpers: require("./helpers/handlebars")
   })
 );
 //Todas las vistas las reconocerá como .hbs
-app.set("view engine", ".hbs");
+app.set("Views engine", ".hbs");
 
 // Definir ruta para archivos estáticos
 app.use(express.static(path.join(__dirname, "Public")));
