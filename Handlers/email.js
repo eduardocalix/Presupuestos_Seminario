@@ -1,4 +1,4 @@
-const emailConfig = require("../config/email");
+const emailConfig = require("../Config/email");
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
 const util = require("util");
