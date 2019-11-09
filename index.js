@@ -88,7 +88,7 @@ app.use((error, req, res, next) => {
   res.locals.status = status;
   res.status(status);
 
-  res.render("noEncontrado", {
+  res.render("/noEncontrado", {
     status,
     message: error.message
   });
