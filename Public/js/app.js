@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./node_modules/axios";
 import Swal from "sweetalert2";
 
 document.addEventListener("DOMContentLoaded", () => {

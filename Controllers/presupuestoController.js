@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 //const Presupuesto = mongoose.model("presupuesto");
-const Presupuesto = require('../Models/modeloPresupuesto');
-const Gastos = require("../Models/modeloGastos");
+const Presupuesto = require('../models/modeloPresupuesto');
+const Gastos = require("../models/modeloGastos");
 //const Vacante = mongoose.model("Vacante");
 const { isAuthenticated } = require('../helpers/auth');
-const Usuario = require('../Models/modeloUsuario');
+const Usuario = require('../models/modeloUsuario');
 
 exports.homePresupuesto = async (req, res, next) => {
   res.render("inicio", {

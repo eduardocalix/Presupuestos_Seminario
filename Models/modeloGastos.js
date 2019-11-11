@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const slug = require("slug");
-const shortid = require("shortid");
+const slug = require("./node_modules/slug");
+const shortid = require("./node_modules/shortid");
 
 // Definición del schema
 // https://mongoosejs.com/docs/guide.html#models

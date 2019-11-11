@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
-require("./Config/db");
+require("./config/db");
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const router = require("./Routes/index");
+const router = require("./routes/index");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
-const passport = require("./Config/passport");
+const passport = require("./config/passport");
 const crearError = require("http-errors");
 
 // Habilitando el archivo de variables de entorno
@@ -30,7 +30,7 @@ app.engine(
    // defaultLayout: 'main',
    defaultLayout: "layout",
 
-    //layoutsDir: path.join(app.get('Views'), 'Layouts'),
+    layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs'
    // helpers: require("./helpers/handlebars")
@@ -40,7 +40,7 @@ app.engine(
 app.set("view engine", ".hbs");
 
 // Definir ruta para archivos estáticos
-app.use(express.static(path.join(__dirname, "Public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Creación de la sesión y de la cookie
 app.use(cookieParser());

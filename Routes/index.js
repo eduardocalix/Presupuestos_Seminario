@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
 
-const presupuestoController = require("../Controllers/presupuestoController");
-const gastoController = require("../Controllers/gastoController");
+const presupuestoController = require("../controllers/presupuestoController");
+const gastoController = require("../controllers/gastoController");
 const usuarioController = require("../Controllers/usuarioController");
-const authController = require("../Controllers/authController");
+const authController = require("../controllers/authController");
 
 module.exports = () => {
   router.get("/", presupuestoController.homePresupuesto);

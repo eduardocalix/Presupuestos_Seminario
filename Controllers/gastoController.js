@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 //const Gasto = mongoose.model("gasto");
 
 //const Presupuesto = mongoose.model("presupuesto");
-const Presupuesto = require('../Models/modeloPresupuesto');
-const Usuario = require('../Models/modeloUsuario');
+const Presupuesto = require('../models/modeloPresupuesto');
+const Usuario = require('../models/modeloUsuario');
 
-const Gasto = require("../Models/modeloGastos");
+const Gasto = require("../models/modeloGastos");
 
 exports.formularioNuevaGasto = async (req, res) => {
   const presupuesto = await Presupuesto.findOne({ url: req.params.url });

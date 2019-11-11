@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 //const Usuario = mongoose.model("usuario");
 const { validationResult } = require("express-validator");
-const Usuario = require('../Models/modeloUsuario');
+const Usuario = require('../models/modeloUsuario');
 
 // Mostrar el formulario de inicio de sesión
 
