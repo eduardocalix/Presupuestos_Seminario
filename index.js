@@ -31,7 +31,7 @@ app.engine(
    defaultLayout: "layout",
 
     //layoutsDir: path.join(app.get('Views'), 'Layouts'),
-    //partialsDir: path.join(app.get('Views'), 'partials'),
+    partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs'
    // helpers: require("./helpers/handlebars")
   })
