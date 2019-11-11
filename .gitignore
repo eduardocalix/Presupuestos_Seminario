@@ -54,11 +54,42 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+
 # dotenv environment variables file
 .env
-
 .env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
 # next.js build output
 .next
 
+# nuxt.js build output
+.nuxt
+
+# gatsby files
+.cache/
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Omitir archivos de OSX
+.DE_Store
+
+# Omitir los archivos de subida públicos
+public/uploads/cv/*
+public/uploads/perfiles/*
+
+# Omitir las variables de entorno
 variables.env
