@@ -12,4 +12,6 @@ mongoose.connection.on("error", error => {
 });
 
 // Importando los modelos
-//require("../models/Vacante");
+require("../models/modeloUsuario");
+require("../models/modeloGastos");
+require("../models/modeloPresupuesto");
