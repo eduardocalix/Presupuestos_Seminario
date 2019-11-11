@@ -6,7 +6,7 @@
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const bcrypt = require("./node_modules/bcrypt");
+const bcrypt = require("bcrypt");
 
 // Definición del schema
 const usuarioSchema = new mongoose.Schema({
