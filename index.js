@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-require("../config/db");
+require("./config/db");
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
@@ -9,7 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const flash = require("connect-flash");
-const passport = require("../config/passport");
+const passport = require("./config/passport");
 const crearError = require("http-errors");
 
 // Habilitando el archivo de variables de entorno
