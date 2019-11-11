@@ -28,8 +28,8 @@ app.engine(
   exphbs({
       //El main es la vista principal de todo el proyecto
    // defaultLayout: 'main',
-    layoutsDir: path.join(app.get('Views'), 'Layouts'),
-    partialsDir: path.join(app.get('Views'), 'partials'),
+    //layoutsDir: path.join(app.get('Views'), 'Layouts'),
+    //partialsDir: path.join(app.get('Views'), 'partials'),
     extname: '.hbs',
     defaultLayout: "layout"
    // helpers: require("./helpers/handlebars")
