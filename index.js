@@ -89,7 +89,7 @@ app.use((error, req, res, next) => {
   res.locals.status = status;
   res.status(status);
 
-  res.render("/views/errore.hbs", {
+  res.render("error", {
     nombrePagina: "No encontrado",
     status,
     message: error.message
