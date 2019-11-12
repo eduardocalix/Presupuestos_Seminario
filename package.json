@@ -46,8 +46,7 @@
     "passport-local": "^1.0.0",
     "shortid": "^2.2.15",
     "slug": "^1.1.0",
-    "sweetalert2": "^8.18.4",
-    "nodemon": "^1.19.4"
+    "sweetalert2": "^8.18.4"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
