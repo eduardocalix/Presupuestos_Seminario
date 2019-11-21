@@ -42,6 +42,7 @@
     "multer": "^1.4.2",
     "nodemailer": "^6.3.1",
     "nodemailer-express-handlebars": "^3.1.0",
+    "nodemon": "^1.19.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "shortid": "^2.2.15",
@@ -52,7 +53,6 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
-    "nodemon": "^1.19.4",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
   }
