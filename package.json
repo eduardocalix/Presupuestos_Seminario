@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/eduardocalix/Presupuestos_Seminario.git#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "concurrently": "^4.1.2",
     "connect-mongo": "^3.0.0",
